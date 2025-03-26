@@ -21,10 +21,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'debug_toolbar',
-
-    'blog',
+    'blog.apps.BlogConfig',
 ]
 
 MIDDLEWARE = [
@@ -105,3 +103,4 @@ MEDIA_URL = os.getenv('MEDIA_URL', '/media/')
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
