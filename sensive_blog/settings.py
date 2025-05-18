@@ -4,6 +4,8 @@ from environs import Env
 env = Env()
 env.read_env()
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 COMPANY_COORDINATES = [55.751244, 37.618423]
@@ -21,10 +23,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'blog.apps.BlogConfig',
     'debug_toolbar',
 
-    'blog',
+
 ]
 
 MIDDLEWARE = [
@@ -92,16 +94,20 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_URL = os.getenv('STATIC_URL', '/static/')
+STATIC_URL =  '/static/'
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"), )
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 
 MEDIA_ROOT = os.getenv("MEDIA_ROOT", os.path.join(BASE_DIR, 'media'))
 
-STATIC_ROOT = os.getenv("STATIC_ROOT")
+STATIC_ROOT = os.getenv("STATIC_ROOT", os.path.join(BASE_DIR, 'staticfiles'))
 
 MEDIA_URL = os.getenv('MEDIA_URL', '/media/')
 
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+
