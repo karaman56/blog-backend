@@ -13,24 +13,21 @@ from .data import SLIDER_POSTS, BLOG_POSTS
 
 def index(request):
     context = {
-        'posts': SLIDER_POSTS,
+        'posts': SLIDER_POSTS,  # Исправлено имя переменной
         'blog_posts': BLOG_POSTS
     }
     return render(request, 'index.html', context)
 
-def serialize_post(post):
-    return {
-        "title": post.title,
-        "text": post.text,
-        "author": post.author.username,
-        "comments_amount": Comment.objects.filter(post=post).count(),
-        "image_url": post.image.url if post.image else None,
-        "published_at": post.published_at,
-        "slug": post.slug,
-    }
 
+def post_detail(request, slug):
+    # Объединяем все посты для поиска
+    all_posts = SLIDER_POSTS + BLOG_POSTS
+    post = next((p for p in all_posts if p['slug'] == slug), None)
 
+    if not post:
+        return render(request, '404.html')
 
+    return render(request, 'blog-details.html', {'post': post})
 
 
 def post_detail(request, slug):
