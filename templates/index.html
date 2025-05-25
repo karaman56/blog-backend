@@ -1,115 +1,172 @@
-{% load static %}
+
+    {% load static %}
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sensive Blog - Home</title>
     <link rel="icon" href="img/favicon.png" type="image/png">
 
-    <!-- Безопасные стили для выделения текста -->
-    <style>
-      .text-selectable {
-        user-select: text;
-        -webkit-user-select: text;
-        -moz-user-select: text;
-        -ms-user-select: text;
-        pointer-events: auto;
-      }
-
-      .hero-banner__content,
-      .blog__slide__content {
-        position: relative;
-        z-index: 2;
-      }
-    </style>
-
     <link rel="stylesheet" href="{% static 'css/styles.min.css' %}">
   </head>
-
   <body>
     <!--================Header Menu Area =================-->
     <header class="header_area">
       <div class="main_menu">
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="container box_1620">
-            <a class="navbar-brand logo_h" href="index.html">
-              <img src="{% static 'img/logo.png' %}" alt="Logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <a class="navbar-brand logo_h" href="index.html"><img src="{% static 'img/logo.png' %}" alt="">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
+            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
               <ul class="nav navbar-nav menu_nav justify-content-center">
-                <li class="nav-item active"><a class="nav-link text-selectable" href="index.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link text-selectable" href="contact.html">Contact</a></li>
+                <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right navbar-social">
+                <li><a href="#"><i class="ti-facebook"></i></a></li>
+                <li><a href="#"><i class="ti-twitter-alt"></i></a></li>
+                <li><a href="#"><i class="ti-instagram"></i></a></li>
+                <li><a href="#"><i class="ti-skype"></i></a></li>
               </ul>
             </div>
           </div>
         </nav>
       </div>
     </header>
+    <!--================Header Menu Area =================-->
 
     <main class="site-main">
       <!--================Hero Banner start =================-->
       <section class="mb-30px">
-        <div class="container">
-          <div class="hero-banner">
+    <div class="container">
+        <div class="hero-banner">
             <img src="{% static 'img/hero-banner.png' %}" alt="Hero Banner">
-            <div class="hero-banner__content text-selectable">
-              <h3>Tours &amp; Travels</h3>
-              <h1>Amazing Places on earth</h1>
-              <h4>December 12, 2018</h4>
+            <div class="hero-banner__content">
+                <h3>Tours &amp; Travels</h3>
+                <h1>Amazing Places on earth</h1>
+                <h4>December 12, 2018</h4>
             </div>
-          </div>
         </div>
-      </section>
+    </div>
+</section>
+      <!--================Hero Banner end =================-->
 
       <!--================ Blog slider start =================-->
-      <section>
-        <div class="container">
-          <div class="d-flex">
-            <div class="flex-fill mr-30">
-              <div class="card blog__slide text-center">
-                <div class="blog__slide__img">
-                  <img class="card-img rounded-0" src="{% static 'img/blog/blog-slider/kids.png' %}" alt="">
-                </div>
-                <div class="blog__slide__content text-selectable">
-                  <h3><a href="#" class="text-selectable">Are You Preparing Your Kids for the Real World?</a></h3>
-                  <p>2 days ago</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="flex-fill" style="margin-right: 30px;">
+      <!--================ Blog slider start =================-->
+<section>
+    <div class="container">
+        <div class="d-flex">
+            {% for post in posts%}
+            <div class="flex-fill {% if not forloop.last %}mr-30{% endif %}">
                 <div class="card blog__slide text-center">
                     <div class="blog__slide__img">
-                        <img class="card-img rounded-0" src="{% static 'img/blog/blog-slider/image_the-biggest-mistake-ever.jpg' %}" alt="">
+                        <!-- Используйте путь из data.py через static -->
+                        <img class="card-img rounded-0"
+                             src="{% static post.image %}"
+                             alt="{{ post.title }}">
                     </div>
-                    <div class="blog__slide__content">
-                        <h3><a href="#">The Biggest Mistake, Ever!</a></h3>
-                        <p>2 days ago</p>
+                    <div class="blog__slide__content {% if forloop.first %}text-selectable{% endif %}">
+                        <h3>
+                            <a href="{% url 'post_detail' slug=post.slug %}"
+                               class="{% if forloop.first %}text-selectable{% endif %}">
+                                {{ post.title }}
+                            </a>
+                        </h3>
+                        <p>{{ post.date }}</p>
                     </div>
                 </div>
             </div>
-
-            <div class="flex-fill">
-                <div class="card blog__slide text-center">
-                    <div class="blog__slide__img">
-                        <img class="card-img rounded-0" src="{% static 'img/blog/blog-slider/image_an-open-letter-to-bureaucrats.jpg' %}" alt="">
+            {% endfor %}
+        </div>
+    </div>
+</section>
+      <!--================ Blog slider end =================-->
+<section class="blog-post-area section-margin mt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                {% for post in blog_posts %}
+                <div class="single-recent-blog-post">
+                    <div class="thumb">
+                        <img class="img-fluid" src="{% static post.image %}" alt="{{ post.title }}">
+                        <ul class="thumb-info">
+                            <li><a href="#"><i class="ti-user"></i>{{ post.author }}</a></li>
+                            <li><a href="#"><i class="ti-notepad"></i>{{ post.date }}</a></li>
+                            <li><a href="#"><i class="ti-themify-favicon"></i>{{ post.comments_count }} Comments</a></li>
+                        </ul>
                     </div>
-                    <div class="blog__slide__content">
-                        <h3><a href="#">An Open Letter to Bureaucrats (A Must-Read)</a></h3>
-                        <p>2 days ago</p>
+                    <div class="details mt-20">
+                        <h3>{{ post.title }}</h3>
+                        <p>{{ post.excerpt }}</p>
+                        <a class="button" href="{% url 'post_detail' slug=post.slug %}">
+                            Read More <i class="ti-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <!-- Пагинация -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <nav class="blog-pagination justify-content-center d-flex">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a href="#" class="page-link" aria-label="Previous">
+                                        <span aria-hidden="true"><i class="ti-angle-left"></i></span>
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                                <li class="page-item"><a href="#" class="page-link">2</a></li>
+                                <li class="page-item">
+                                    <a href="#" class="page-link" aria-label="Next">
+                                        <span aria-hidden="true"><i class="ti-angle-right"></i></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Сайдбар -->
+            <div class="col-lg-4 sidebar-widgets">
+                <div class="widget-wrap">
+                    <div class="single-sidebar-widget newsletter-widget">
+                        <h4 class="single-sidebar-widget__title">Newsletter</h4>
+                        <div class="form-group mt-30">
+                            <div class="col-autos">
+                                <input type="text" class="form-control"
+                                       placeholder="Enter email"
+                                       onfocus="this.placeholder = ''"
+                                       onblur="this.placeholder = 'Enter email'">
+                            </div>
+                        </div>
+                        <button class="bbtns d-block mt-20 w-100">Subscribe</button>
+                    </div>
+
+                    <div class="single-sidebar-widget post-category-widget">
+                        <div class="advertisement" style="height:200px;">
+                            <h4>Advertisement</h4>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
-      <!--================ Blog slider end =================-->
+  </section>
+
+
+
+      <!--================ End Blog Post Area =================-->
           </div>
         </div>
       </section>

@@ -7,7 +7,16 @@ from django.shortcuts import render
 from blog.models import Comment
 from blog.models import Post
 from sensive_blog.settings import COMPANY_COORDINATES
+from django.shortcuts import render
+from .data import SLIDER_POSTS, BLOG_POSTS
 
+
+def index(request):
+    context = {
+        'posts': SLIDER_POSTS,
+        'blog_posts': BLOG_POSTS
+    }
+    return render(request, 'index.html', context)
 
 def serialize_post(post):
     return {
@@ -21,19 +30,7 @@ def serialize_post(post):
     }
 
 
-def index(request):
-    """
-    Вьюхи не оптимизированы, потому что в последней задаче модуля Django ORM нужно их оптимизировать как раз на примере этого сайта.
-    """
-    all_posts = Post.objects.prefetch_related('author')
-    popular_posts = all_posts.annotate(likes_count=Count('likes')).order_by('-likes_count')[:3]
-    fresh_posts = all_posts.order_by('-published_at')[:5]
 
-    context = {
-        'most_popular_posts': [serialize_post(post) for post in popular_posts],
-        'fresh_posts': [serialize_post(post) for post in fresh_posts],
-    }
-    return render(request, 'index.html', context)
 
 
 def post_detail(request, slug):
