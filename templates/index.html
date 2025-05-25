@@ -1,7 +1,5 @@
-
 {% load static %}
 <!DOCTYPE html>
-
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -12,12 +10,21 @@
 
     <link rel="stylesheet" href="{% static 'css/styles.min.css' %}">
   </head>
+   <style>
+      .thumb-info {
+        max-width: 550px;  /* Основное свойство */
+        width: 100%;       /* Чтобы элемент занимал всю доступную ширину до 550px */
+        margin: 0 auto;    /* Центрирование по горизонтали */
+        box-sizing: border-box; /* Чтобы padding не увеличивал ширину */
+      }
+    </style>
+  </head>
   <body>
     <!--================Header Menu Area =================-->
     <header class="header_area">
       <div class="main_menu">
         <nav class="navbar navbar-expand-lg navbar-light">
-          <div class="container box_1620">
+          <div class="container box_620">
             <!-- Brand and toggle get grouped for better mobile display -->
             <a class="navbar-brand logo_h" href="index.html"><img src="{% static 'img/logo.png' %}" alt="">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,8 +66,6 @@
     </div>
 </section>
       <!--================Hero Banner end =================-->
-
-      <!--================ Blog slider start =================-->
       <!--================ Blog slider start =================-->
 <section>
     <div class="container">
