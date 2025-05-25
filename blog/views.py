@@ -20,21 +20,17 @@ def index(request):
 
 
 def post_detail(request, slug):
-
     all_posts = SLIDER_POSTS + BLOG_POSTS
     post = next((p for p in all_posts if p['slug'] == slug), None)
 
     if not post:
         return render(request, '404.html')
 
-
-    comments = post.get('comments', [])
-
-    context = {
+    # Добавить пагинацию комментариев при необходимости
+    return render(request, 'blog-details.html', {
         'post': post,
-        'comments': comments
-    }
-    return render(request, 'blog-details.html', context)
+        'comments': post.get('comments', [])
+    })
 
 
 

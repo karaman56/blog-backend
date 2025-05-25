@@ -44,10 +44,23 @@ BLOG_POSTS = [
         "image": "img/shave.png",  # Пример реального файла из вашей структуры
         "date": "2023-08-20",
         "slug": "friends-forever",
-        "content": "Лиза и Оля всегда неровно дышали к программированию. Они решили создать команду: Лиза будет изучать Python, а Оля — вёрстку. В конце получится веб-студия, способная с нуля сделать любой заказ ...",
+        "content": "Лиза и Оля всегда неровно дышали к программированию. Они решили создать команду: Лиза будет изучать Python, а Оля — вёрстку. В конце получится веб-студия, способная с нуля сделать любой заказ Девушки готовились к своей мечте около года. Лиза без устали программировала, писала циклы и условия, изучала базы данных. Оля же штудировала справочники по CSS и HTML, ходила на выставки, вбирала в себя все дизайнерские приёмы, какие могла.Через год подруги организовали веб-студию. Первым заказом их коллектива стал онлайн-блог. Девушки спешили как могли, но прямо перед релизом Лиза выбыла из игры: её сломила тяжёлая болезнь.",
         "author": "Admin",
         "comments_count": 2,
-        "excerpt": "Friends Forever"
+        "excerpt": "Friends Forever",
+        "likes": 4,  # Добавить это поле
+        "comments": [  # Заменить comments_count на полный список
+            {
+                "text": "Отличный пост!",
+                "author": "Анна",
+                "date": "2023-08-21"
+            },
+            {
+                "text": "Интересно!",
+                "author": "Петр",
+                "date": "2023-08-22"
+            }
+        ]
     },
 {
         "title": "It’s All About Me",
@@ -57,8 +70,22 @@ BLOG_POSTS = [
         "content": "Over yielding doesn't so moved green saw meat...",
         "author": "Admin",
         "comments_count": 2,
-        "excerpt": "It’s All About Me"
+        "excerpt": "It’s All About Me",
+        "likes": 4,  # Добавить это поле
+        "comments": [  # Заменить comments_count на полный список
+            {
+                "text": "Отличный пост!",
+                "author": "Анна",
+                "date": "2023-08-21"
+            },
+            {
+                "text": "Интересно!",
+                "author": "Петр",
+                "date": "2023-08-22"
+            }
+        ]
     },
+
 {
         "title": "You Are the Captain of Your Ship",
         "image": "img/shave.png",  # Пример реального файла из вашей структуры
@@ -67,7 +94,20 @@ BLOG_POSTS = [
         "content": "Over yielding doesn't so moved green saw meat...",
         "author": "Admin",
         "comments_count": 2,
-        "excerpt": "You Are the Captain of Your Ship"
+        "excerpt": "You Are the Captain of Your Ship",
+        "likes": 4,  # Добавить это поле
+        "comments": [  # Заменить comments_count на полный список
+            {
+                "text": "Отличный пост!",
+                "author": "Анна",
+                "date": "2023-08-21"
+            },
+            {
+                "text": "Интересно!",
+                "author": "Петр",
+                "date": "2023-08-22"
+            }
+        ]
     },
 {
         "title": "24 Ways to Simplify Your Life",
@@ -77,17 +117,43 @@ BLOG_POSTS = [
         "content": "Over yielding doesn't so moved green saw meat...",
         "author": "Admin",
         "comments_count": 2,
-        "excerpt": "24 Ways to Simplify Your Life"
+        "excerpt": "24 Ways to Simplify Your Life",
+        "likes": 4,  # Добавить это поле
+        "comments": [  # Заменить comments_count на полный список
+            {
+                "text": "Отличный пост!",
+                "author": "Анна",
+                "date": "2023-08-21"
+            },
+            {
+                "text": "Интересно!",
+                "author": "Петр",
+                "date": "2023-08-22"
+            }
+        ]
     },
 {
         "title": "5 Qualities of Great Leaders",
         "image": "img/image_5-qualities-great-leader.jpg",  # Пример реального файла из вашей структуры
         "date": "2023-08-20",
-        "slug": "abra",
+        "slug": "5-qualities-great-leaders",
         "content": "Over yielding doesn't so moved green saw meat...",
         "author": "Admin",
         "comments_count": 2,
-        "excerpt": "5 Qualities of Great Leaders"
+        "excerpt": "5 Qualities of Great Leaders",
+        "likes": 4,  # Добавить это поле
+        "comments": [  # Заменить comments_count на полный список
+            {
+                "text": "Отличный пост!",
+                "author": "Анна",
+                "date": "2023-08-21"
+            },
+            {
+                "text": "Интересно!",
+                "author": "Петр",
+                "date": "2023-08-22"
+            }
+        ]
     },
 
 ]

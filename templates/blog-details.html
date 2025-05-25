@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Remake Barber - Blog Details</title>
     <link rel="icon" href="img/favicon.png" type="image/png">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
    <link rel="stylesheet" href="{% static 'css/styles.min.css' %}">
   </head>
 
@@ -86,7 +86,7 @@
                     </div>
                     <p>{{ post.content }}</p>
                     <div class="news_d_footer flex-column flex-sm-row">
-                        <a href="#"><span class="align-middle mr-2"><i class="ti-heart"></i></span>{{ post.likes }} people like this</a>
+                        <a href="#"><span class="align-middle mr-2"><i class="ti-heart" style="color: #ff0000 !important;"></i></span>{{ post.likes }} people like this</a>
                         <a class="justify-content-sm-center ml-sm-auto mt-sm-0 mt-2" href="#">
                             <span class="align-middle mr-2"><i class="ti-themify-favicon"></i></span>
                             {{ post.comments|length }} Comments
