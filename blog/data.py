@@ -63,7 +63,7 @@ BLOG_POSTS = [
         "title": "You Are the Captain of Your Ship",
         "image": "img/shave.png",  # Пример реального файла из вашей структуры
         "date": "2023-08-20",
-        "slug": "you-are-captain-of-your-ship",
+        "slug": "captain-of-your-ship",
         "content": "Over yielding doesn't so moved green saw meat...",
         "author": "Admin",
         "comments_count": 2,
@@ -71,7 +71,7 @@ BLOG_POSTS = [
     },
 {
         "title": "24 Ways to Simplify Your Life",
-        "image": "img/shave.png",  # Пример реального файла из вашей структуры
+        "image": "img/shave.png",
         "date": "2023-08-20",
         "slug": "ways_to_simplify_your_life",
         "content": "Over yielding doesn't so moved green saw meat...",

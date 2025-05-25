@@ -20,45 +20,23 @@ def index(request):
 
 
 def post_detail(request, slug):
-    # Объединяем все посты для поиска
+
     all_posts = SLIDER_POSTS + BLOG_POSTS
     post = next((p for p in all_posts if p['slug'] == slug), None)
 
     if not post:
         return render(request, '404.html')
 
-    return render(request, 'blog-details.html', {'post': post})
 
-
-def post_detail(request, slug):
-    """
-    Вьюхи не оптимизированы, потому что в последней задаче модуля Django ORM нужно их оптимизировать как раз на примере этого сайта.
-    """
-    post = get_object_or_404(Post, slug=slug)
-    comments = Comment.objects.filter(post=post)
-    serialized_comments = []
-    for comment in comments:
-        serialized_comments.append({
-            'text': comment.text,
-            'published_at': comment.published_at,
-            'author': comment.author.username,
-        })
-
-    serialized_post = {
-        "title": post.title,
-        "text": post.text,
-        "author": post.author.username,
-        "comments": serialized_comments,
-        'likes_amount': post.likes.count(),
-        "image_url": post.image.url if post.image else None,
-        "published_at": post.published_at,
-        "slug": post.slug,
-    }
+    comments = post.get('comments', [])
 
     context = {
-        'post': serialized_post,
+        'post': post,
+        'comments': comments
     }
     return render(request, 'blog-details.html', context)
+
+
 
 
 def contact(request):
