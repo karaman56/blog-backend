@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sensive Blog - {% block title %}{% endblock %}</title>
+    <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="{% static 'css/styles.min.css' %}">
+
+    {% block extra_css %}
+    <style>
+      .thumb-info {
+        max-width: 550px;
+        width: 100%;
+        margin: 0 auto;
+        box-sizing: border-box;
+      }
+      .hero-banner {
+        background: none !important;
+        position: relative;
+        z-index: 1;
+      }
+      .hero-banner__content h1,
+      .hero-banner__content h3,
+      .hero-banner__content h4 {
+        color: #ffffff;
+      }
+      .hero-banner::after {
+        display: none !important;}
+    </style>
+    {% endblock %}
+</head>
+<body>
+    <!--================Header Menu Area =================-->
+    <header class="header_area">
+      <div class="main_menu">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <div class="container box_620">
+            <a class="navbar-brand logo_h" href="{% url 'index' %}">
+                <img src="{% static 'img/logo.png' %}" alt="Sensive Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+              <ul class="nav navbar-nav menu_nav justify-content-center">
+                <li class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                <li class="nav-item {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right navbar-social">
+                <li><a href="#"><i class="ti-facebook"></i></a></li>
+                <li><a href="#"><i class="ti-twitter-alt"></i></a></li>
+                <li><a href="#"><i class="ti-instagram"></i></a></li>
+                <li><a href="#"><i class="ti-skype"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main class="site-main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!--================Footer Area =================-->
+    <footer class="footer-area section-padding">
+        <div class="container">
+            <!-- Ваш футер здесь -->
+        </div>
+    </footer>
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>
