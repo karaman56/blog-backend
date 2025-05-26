@@ -9,16 +9,29 @@
     <link rel="icon" href="img/favicon.png" type="image/png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <link rel="stylesheet" href="{% static 'css/styles.min.css' %}">
-  </head>
-   <style>
+
+    <style>
       .thumb-info {
-        max-width: 550px;  /* Основное свойство */
-        width: 100%;       /* Чтобы элемент занимал всю доступную ширину до 550px */
-        margin: 0 auto;    /* Центрирование по горизонтали */
-        box-sizing: border-box; /* Чтобы padding не увеличивал ширину */
+        max-width: 550px;
+        width: 100%;
+        margin: 0 auto;
+        box-sizing: border-box;
       }
+      .hero-banner {
+        background: none !important;
+        position: relative;
+        z-index: 1;
+      }
+      .hero-banner__content h1,
+      .hero-banner__content h3,
+      .hero-banner__content h4 {
+        color: #ffffff;
+      }
+      .hero-banner::after {
+        display: none !important;}
     </style>
   </head>
+ <body>
   <body>
     <!--================Header Menu Area =================-->
     <header class="header_area">
@@ -53,37 +66,45 @@
 
     <main class="site-main">
       <!--================Hero Banner start =================-->
-      <section class="mb-30px">
+     <section class="mb-30px">
     <div class="container">
-        <div class="hero-banner">
-            <img src="{% static 'img/hero-banner.png' %}" alt="Hero Banner">
-            <div class="hero-banner__content">
-                <h3>Tours &amp; Travels</h3>
-                <h1>Amazing Places on earth</h1>
-                <h4>December 12, 2018</h4>
+        <div class="hero-banner" style="position: relative; padding-bottom: 150px;">
+            <img src="{% static 'img/hero-banner.png' %}" alt="Hero Banner" style="width: 100%; height: auto; position: relative; z-index: 1;">
+
+            <div class="hero-banner__content"
+                 style="position: absolute;
+                        top: 30%;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        max-width: 600px;
+                        padding: 20px;
+                        z-index: 2;
+                        text-align: center;">
+                <h3 style="font-size: 24px; color: #fff; margin-bottom: 10px;">Tours &amp; Travels</h3>
+                <h1 style="font-size: 36px; color: #fff; margin-bottom: 15px;">Amazing Places on earth</h1>
+                <h4 style="font-size: 18px; color: #fff;">December 12, 2018</h4>
             </div>
         </div>
     </div>
 </section>
       <!--================Hero Banner end =================-->
       <!--================ Blog slider start =================-->
-<section>
+ <section>
     <div class="container">
         <div class="d-flex">
-            {% for post in posts%}
+            {% for post in posts %}
             <div class="flex-fill {% if not forloop.last %}mr-30{% endif %}">
                 <div class="card blog__slide text-center">
                     <div class="blog__slide__img">
-                        <!-- Используйте путь из data.py через static -->
                         <img class="card-img rounded-0"
                              src="{% static post.image %}"
                              alt="{{ post.title }}">
                     </div>
                     <div class="blog__slide__content {% if forloop.first %}text-selectable{% endif %}">
                         <h3>
-                            <a href="{% url 'post_detail' slug=post.slug %}"
-                               class="{% if forloop.first %}text-selectable{% endif %}">
+                            <a href="{% url 'post_detail' slug=post.slug %}" class="text-dark">
                                 {{ post.title }}
+
                             </a>
                         </h3>
                         <p>{{ post.date }}</p>
@@ -95,6 +116,8 @@
     </div>
 </section>
       <!--================ Blog slider end =================-->
+
+          <!--================ Start Blog Post Area =================-->
 <section class="blog-post-area section-margin mt-4">
     <div class="container">
         <div class="row">

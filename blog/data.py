@@ -3,15 +3,11 @@ SLIDER_POSTS = [
         "title": "Are You Preparing Your Kids for the Real World?",
         "image": "img/blog/blog-slider/kids.png",
         "date": "2 days ago",
-        "slug": "kids-real-world",
+        "slug": "kids-real-world",  # Этот slug должен совпадать с URL
         "content": "Full text here...",
         "author": "John Doe",
-        "comments": [
-            {
-                "text": "Great post!",
-                "author": "Alice"
-            }
-        ]
+        "likes": 5,
+        "comments": []
     },
     {
         "title": "The Biggest Mistake, Ever!",
@@ -20,6 +16,7 @@ SLIDER_POSTS = [
         "slug": "biggest-mistake",
         "content": "Full text here...",
         "author": "Jane Smith",
+        "likes": 6,
         "comments": []
     },
     {
@@ -29,6 +26,7 @@ SLIDER_POSTS = [
         "slug": "open-letter-bureaucrats",
         "content": "Full text here...",
         "author": "John Doe",
+        "likes": 4,
         "comments": [
             {
                 "text": "Great post!",
