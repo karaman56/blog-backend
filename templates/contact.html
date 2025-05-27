@@ -5,7 +5,7 @@
 
 {% block content %}
 <!--================ Hero sm banner start =================-->
-section class="mb-30px">
+<section class="mb-30px">
     <div class="container">
         <div class="hero-banner hero-banner--sm"
              style="position: relative; padding-bottom: 150px;">
@@ -40,7 +40,7 @@ section class="mb-30px">
 <section class="section-margin--small section-margin">
     <div class="container">
         <div class="d-none d-sm-block mb-5 pb-4">
-            Тут будет карта
+            {{ html_map|safe }}
         </div>
 
         <div class="row">
