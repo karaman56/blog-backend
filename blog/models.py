@@ -7,7 +7,7 @@ class Post(models.Model):
     title = models.CharField("Заголовок", max_length=200)
     text = models.TextField("Текст")
     slug = models.SlugField("Название в виде url", max_length=200)
-    image = models.ImageField("Картинка")
+    image = models.CharField("Путь к картинке",  max_length=200,  default='default.jpg'),
     published_at = models.DateTimeField("Дата и время публикации")
 
     author = models.ForeignKey(
@@ -37,7 +37,9 @@ class Comment(models.Model):
     post = models.ForeignKey(
         "Post",
         on_delete=models.CASCADE,
-        verbose_name="Пост, к которому написан")
+        verbose_name="Пост, к которому написан", related_name="comments"
+    )
+
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -53,3 +55,5 @@ class Comment(models.Model):
         ordering = ['published_at']
         verbose_name = 'комментарий'
         verbose_name_plural = 'комментарии'
+
+

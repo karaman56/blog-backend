@@ -3,40 +3,64 @@ import folium
 from django.db.models import Count
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
-
+from .models import Post
 from blog.models import Comment
 from blog.models import Post
 from sensive_blog.settings import COMPANY_COORDINATES
-from django.shortcuts import render
-from .data import SLIDER_POSTS, BLOG_POSTS
+
+
+def serialize_post(post):
+    return {
+        "title": post.title,
+        "text": post.text,
+        "author": post.author.username,
+        "comments_amount": Comment.objects.filter(post=post).count(),
+        "image_url": post.image.url if post.image else None,
+        "published_at": post.published_at,
+        "slug": post.slug,
+    }
 
 
 def index(request):
-    context = {
-        'posts': SLIDER_POSTS,  # Исправлено имя переменной
-        'blog_posts': BLOG_POSTS
-    }
-    return render(request, 'index.html', context)
-
-
-def post_detail(request, slug):
-    all_posts = SLIDER_POSTS + BLOG_POSTS
-    post = next((p for p in all_posts if p['slug'] == slug), None)
-
-    if not post:
-        return render(request, '404.html')
-
-    # Добавить пагинацию комментариев при необходимости
-    return render(request, 'blog-details.html', {
-        'post': post,
-        'comments': post.get('comments', [])
+    all_posts = Post.objects.order_by('-published_at')[:10]
+    slider_posts = all_posts[:3]
+    blog_posts = all_posts[3:]
+    return render(request, 'index.html', {
+        'slider_posts': slider_posts,
+        'blog_posts': blog_posts
     })
 
 
+def post_detail(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    comments = post.comment_set.all()
+    return render(request, 'blog-details.html', {
+        'post': post,
+        'comments': comments
+    })
+    serialized_post = {
+        "title": post.title,
+        "text": post.text,
+        "author": post.author.username,
+        "comments": serialized_comments,
+        'likes_amount': post.likes.count(),
+        "image_url": post.image.url if post.image else None,
+        "published_at": post.published_at,
+        "slug": post.slug,
+    }
+
+    context = {
+        'post': serialized_post,
+    }
+    return render(request, 'blog-details.html', context)
 
 
 def contact(request):
-
+    """
+    Вьюхи не оптимизированы, потому что в последней задаче модуля Django ORM нужно их оптимизировать как раз на примере этого сайта.
+    """
+    # позже здесь будет код для статистики заходов на эту страницу
+    # и для записи фидбека
     folium_map = folium.Map(location=COMPANY_COORDINATES, zoom_start=12)
     folium.Marker(
         COMPANY_COORDINATES,
