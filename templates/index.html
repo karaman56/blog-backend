@@ -30,24 +30,38 @@
 <!--================ Blog slider start =================-->
 <section>
     <div class="container">
-        <div class="d-flex">
+        <h2 class="text-center mb-4">Featured Posts</h2>
+        <div class="d-flex flex-wrap justify-content-center">
             {% for post in slider_posts %}
-            <div class="flex-fill {% if not forloop.last %}mr-30{% endif %}">
+            <div class="col-md-4 mb-4">
                 <div class="card blog__slide text-center">
+                    <!-- Добавлено изображение -->
                     <div class="blog__slide__img">
-                        <img class="card-img rounded-0"
-                            src="{% static 'img/'|add:post.image %}"
+                        {% if post.image %}
+                            <img class="card-img-top"
+                                 src="{{ post.image.url }}"
                                  alt="{{ post.title }}">
+                        {% else %}
+                            <div class="no-image-placeholder bg-light d-flex align-items-center justify-content-center"
+                                 style="height: 200px;">
+                                <span>No image</span>
+                            </div>
+                        {% endif %}
                     </div>
-                    <div class="blog__slide__content {% if forloop.first %}text-selectable{% endif %}">
+                    <div class="blog__slide__content">
                         <h3>
                             <a href="{% url 'post_detail' slug=post.slug %}" class="text-dark">
                                 {{ post.title }}
                             </a>
                         </h3>
                         <p>{{ post.published_at|date:"F d, Y" }}</p>
+                        <p class="text-muted">{{ post.text|truncatechars:100 }}</p>
                     </div>
                 </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="alert alert-warning text-center">No featured posts found</div>
             </div>
             {% endfor %}
         </div>
@@ -59,30 +73,41 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
+                <h2>Recent Posts</h2>
+
                 {% for post in blog_posts %}
-              <p>Post: {{ post.title }} | Slug: {{ post.slug }}</p>
-                <div class="single-recent-blog-post">
-                    <div class="thumb">
-                        <img class="img-fluid"
-                            src="{% static 'img/'|add:post.image %}"
-                                alt="{{ post.title }}">
-                        <ul class="thumb-info">
-                            <li><a href="#"><i class="ti-user"></i>{{ post.author.username }}</a></li>
-                            <li><a href="#"><i class="ti-notepad"></i>{{ post.published_at|date:"F d, Y" }}</a></li>
-                            <li><a href="#"><i class="ti-themify-favicon"></i>{{ post.comment_set.count }} Comments</a></li>
-                        </ul>
+                <div class="single-recent-blog-post mb-4">
+                    <!-- Добавлено изображение -->
+                    <div class="thumb mb-3">
+                        {% if post.image %}
+                            <img class="img-fluid rounded"
+                                 src="{{ post.image.url }}"
+                                 alt="{{ post.title }}">
+                        {% else %}
+                            <div class="no-image-placeholder bg-light d-flex align-items-center justify-content-center"
+                                 style="height: 300px;">
+                                <span>No image available</span>
+                            </div>
+                        {% endif %}
                     </div>
+
                     <div class="details mt-20">
                         <h3>{{ post.title }}</h3>
+                        <p class="text-muted">
+                            <i class="ti-user"></i> {{ post.author.username }}
+                            | <i class="ti-notepad"></i> {{ post.published_at|date:"F d, Y" }}
+                            | <i class="ti-themify-favicon"></i> {{ post.comment_set.count }} Comments
+                        </p>
                         <p>{{ post.text|truncatechars:200 }}</p>
-                        <a class="button" href="{% url 'post_detail' slug=post.slug %}">
+                        <a class="btn btn-primary" href="{% url 'post_detail' slug=post.slug %}">
                             Read More <i class="ti-arrow-right"></i>
                         </a>
                     </div>
                 </div>
+                {% empty %}
+                <div class="alert alert-warning">No blog posts found</div>
                 {% endfor %}
             </div>
-            <!-- Сайдбар остается без изменений -->
         </div>
     </div>
 </section>

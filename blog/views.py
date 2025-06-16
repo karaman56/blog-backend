@@ -3,7 +3,7 @@ import folium
 from django.db.models import Count
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
-from .models import Post
+
 from blog.models import Comment
 from blog.models import Post
 from sensive_blog.settings import COMPANY_COORDINATES
@@ -22,6 +22,7 @@ def serialize_post(post):
 
 
 def index(request):
+
     all_posts = Post.objects.order_by('-published_at')[:10]
     slider_posts = all_posts[:3]
     blog_posts = all_posts[3:]
@@ -33,7 +34,7 @@ def index(request):
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    comments = post.comment_set.all()
+    comments = post.comments.all()
     return render(request, 'blog-details.html', {
         'post': post,
         'comments': comments
