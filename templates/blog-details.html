@@ -40,13 +40,17 @@
             <div class="col-lg-8">
                 <div class="main_blog_details">
                     <img class="img-fluid"
-                        src="{{ post.image.url }}"
-                                 alt="{{ post.title }}">
-                    <h4>{{ post.title }}</h4>
-                    <div class="user_details">
-                        <div class="mt-sm-0 mt-3">
-                            <div class="media">
-                                <div class="media-body">
+                        {% if post.image %}
+                          <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                              {% else %}
+                                <img src="{% static 'img/image_you-are-the-captain-of-your-ship.jpg' %}"
+                                     alt="{{ post.title }}" class="post-image default-image">
+                                        {% endif %}
+                                    <h4>{{ post.title }}</h4>
+                                  <div class="user_details">
+                                    <div class="mt-sm-0 mt-3">
+                                      <div class="media">
+                                       <div class="media-body">
                                     <h5>{{ post.author.username }}</h5>
                                     <p>{{ post.published_at|date:"F d, Y" }}</p>
                                 </div>

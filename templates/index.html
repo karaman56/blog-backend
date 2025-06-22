@@ -32,7 +32,8 @@
     <div class="container">
         <h2 class="text-center mb-4">Featured Posts</h2>
         <div class="d-flex flex-wrap justify-content-center">
-            {% for post in slider_posts %}
+
+          {% for post in slider_posts %}
             <div class="col-md-4 mb-4">
                 <div class="card blog__slide text-center">
                     <!-- Добавлено изображение -->
@@ -42,10 +43,9 @@
                                  src="{{ post.image.url }}"
                                  alt="{{ post.title }}">
                         {% else %}
-                            <div class="no-image-placeholder bg-light d-flex align-items-center justify-content-center"
-                                 style="height: 200px;">
-                                <span>No image</span>
-                            </div>
+                      <img src="{% static 'img/image_you-are-the-captain-of-your-ship.jpg' %}"
+                                     alt="{{ post.title }}" class="post-image default-image" style="height: 170px;">
+
                         {% endif %}
                     </div>
                     <div class="blog__slide__content">
