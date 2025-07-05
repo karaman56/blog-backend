@@ -39,18 +39,18 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="main_blog_details">
-                    <img class="img-fluid"
-                        {% if post.image %}
-                          <img src="{{ post.image.url }}" alt="{{ post.title }}">
-                              {% else %}
-                                <img src="{% static 'img/image_you-are-the-captain-of-your-ship.jpg' %}"
-                                     alt="{{ post.title }}" class="post-image default-image">
-                                        {% endif %}
-                                    <h4>{{ post.title }}</h4>
-                                  <div class="user_details">
-                                    <div class="mt-sm-0 mt-3">
-                                      <div class="media">
-                                       <div class="media-body">
+                    {% if post.image %}
+                        <img class="img-fluid" src="{{ post.image.url }}" alt="{{ post.title }}">
+                    {% else %}
+                        <img class="img-fluid" src="{% static 'img/image_you-are-the-captain-of-your-ship.jpg' %}"
+                             alt="{{ post.title }}">
+                    {% endif %}
+
+                    <h4>{{ post.title }}</h4>
+                    <div class="user_details">
+                        <div class="mt-sm-0 mt-3">
+                            <div class="media">
+                                <div class="media-body">
                                     <h5>{{ post.author.username }}</h5>
                                     <p>{{ post.published_at|date:"F d, Y" }}</p>
                                 </div>
@@ -65,24 +65,39 @@
                             </span>
                             {{ post.likes.count }} people like this
                         </a>
-                        <a class="justify-content-sm-center ml-sm-auto mt-sm-0 mt-2" href="#">
-                            <span class="align-middle mr-2"><i class="ti-themify-favicon"></i></span>
-                            {{ comments|length }} Comments
-                        </a>
-                    </div>
-                </div>
+                            <div class="d-flex align-items-center">
+                                <a class="justify-content-sm-center ml-sm-auto mt-sm-0 mt-2" href="#">
+                                    <span class="align-middle mr-2"><i class="ti-themify-favicon"></i></span>
+                                    {{ comments|length }} Comments
+                                </a>
+                                <ul class="nav navbar-nav navbar-social ml-2"
+                                    style="display: flex; flex-direction: row; list-style: none; padding: 0; margin: 0;">
+                                    <li style="margin: 0 5px;"><a href="#"><i class="ti-facebook"></i></a></li>
+                                    <li style="margin: 0 5px;"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+                                    <li style="margin: 0 5px;"><a href="#"><i class="ti-instagram"></i></a></li>
+                                    <li style="margin: 0 5px;"><a href="#"><i class="ti-skype"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
 
-                <!-- Comments Section -->
+
                 <div class="comments-area">
                     <h4>{{ comments|length }} Comments</h4>
                     {% for comment in comments %}
-                    <div class="comment-list">
-                        <div class="single-comment justify-content-between d-flex">
-                            <div class="user justify-content-between d-flex">
+                    <div class="comment-list" style="position: relative; margin-bottom: 20px; background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                        <div class="single-comment">
+                            <div class="user">
                                 <div class="desc">
                                     <h5>{{ comment.author.username }}</h5>
                                     <p class="date">{{ comment.published_at|date:"F d, Y" }}</p>
                                     <p class="comment">{{ comment.text }}</p>
+                                </div>
+                            </div>
+
+                       
+                            <div class="reply-btn-container" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%);">
+                                <div class="reply-btn">
+                                    <a href="#" class="btn-reply text-uppercase" style="display: inline-block; padding: 8px 20px; background: #4CAF50; color: white; border-radius: 4px; text-decoration: none; font-weight: bold;">REPLY</a>
                                 </div>
                             </div>
                         </div>
@@ -90,7 +105,6 @@
                     {% endfor %}
                 </div>
             </div>
-            <!-- Сайдбар без изменений -->
         </div>
     </div>
 </section>

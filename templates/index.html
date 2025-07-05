@@ -39,13 +39,14 @@
                     <!-- Добавлено изображение -->
                     <div class="blog__slide__img">
                         {% if post.image %}
-                            <img class="card-img-top"
-                                 src="{{ post.image.url }}"
-                                 alt="{{ post.title }}">
-                        {% else %}
-                      <img src="{% static 'img/image_you-are-the-captain-of-your-ship.jpg' %}"
-                                     alt="{{ post.title }}" class="post-image default-image" style="height: 170px;">
-
+                    <img class="card-img-top"
+                      src="{{ post.image.url }}"
+                      alt="{{ post.title }}">
+                      {% else %}
+                      <img src="{% static 'img/blog.png' %}"
+                      alt="{{ post.title }}"
+                      class="post-image default-image"
+                      style="height: 170px;">
                         {% endif %}
                     </div>
                     <div class="blog__slide__content">
@@ -55,7 +56,9 @@
                             </a>
                         </h3>
                         <p>{{ post.published_at|date:"F d, Y" }}</p>
-                        <p class="text-muted">{{ post.text|truncatechars:100 }}</p>
+                        <p class="text-muted">
+                            <i class="ti-heart"></i> {{ post.likes.count }} likes
+                             </p>
                     </div>
                 </div>
             </div>
@@ -77,18 +80,18 @@
 
                 {% for post in blog_posts %}
                 <div class="single-recent-blog-post mb-4">
-                    <!-- Добавлено изображение -->
+
                     <div class="thumb mb-3">
-                        {% if post.image %}
-                            <img class="img-fluid rounded"
-                                 src="{{ post.image.url }}"
-                                 alt="{{ post.title }}">
-                        {% else %}
-                            <div class="no-image-placeholder bg-light d-flex align-items-center justify-content-center"
-                                 style="height: 300px;">
-                                <span>No image available</span>
-                            </div>
-                        {% endif %}
+                       {% if post.image %}
+                              <img class="img-fluid rounded"
+                                   src="{{ post.image.url }}"
+                                   alt="{{ post.title }}">
+                          {% else %}
+                              <img class="img-fluid rounded"
+                                   src="{% static 'img/blog.png' %}"
+                                   alt="{{ post.title }}"
+                                   style="height: 300px; object-fit: cover;">
+                          {% endif %}
                     </div>
 
                     <div class="details mt-20">

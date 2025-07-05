@@ -22,10 +22,10 @@ def serialize_post(post):
 
 
 def index(request):
-
+    # Получаем посты с наибольшим количеством лайков
     slider_posts = Post.objects.annotate(
-        comment_count=Count('comments')
-    ).order_by('-comment_count', '-published_at')[:3]
+        like_count=Count('likes')  # Аннотируем количество лайков
+    ).order_by('-like_count', '-published_at')[:3]  # Сортируем по убыванию лайков и даты
 
     slider_post_ids = [post.id for post in slider_posts]
     blog_posts = Post.objects.exclude(
@@ -36,6 +36,7 @@ def index(request):
         'slider_posts': slider_posts,
         'blog_posts': blog_posts
     })
+
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
@@ -75,3 +76,16 @@ def contact(request):
     ).add_to(folium_map)
     html_map = folium_map._repr_html_()
     return render(request, 'contact.html', {"html_map": html_map})
+
+def add_reply(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    if request.method == 'POST':
+        text = request.POST.get('text')
+        if text and request.user.is_authenticated:
+            reply = Comment.objects.create(
+                author=request.user,
+                text=text,
+                post=comment.post,
+                parent_comment=comment
+            )
+    return redirect('post_detail', slug=comment.post.slug)
